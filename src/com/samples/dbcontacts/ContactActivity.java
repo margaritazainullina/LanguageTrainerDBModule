@@ -125,15 +125,25 @@ public class ContactActivity extends ListActivity {
 		AlertDialog.Builder b = new AlertDialog.Builder(this);
 		b.setView(root);
 		b.setTitle(R.string.title_edit);
-		String[] col = {"_ID"};
-		Cursor name = getContentResolver().query(ContactProvider.CONTENT_URI, col,"_ID=selectedIndex",
-				null, null, null);
-		String n = name.getString(0);
-	
+		String[] col = { "FIRST_NAME", "PHONE" };
+		Cursor c = getContentResolver().query(ContactProvider.CONTENT_URI, col,
+				"_ID=" + selectedIndex, null, null, null);
+		c.moveToFirst();
+		String name_q = "";
+		int phone_q = 0;
+		while (!c.isAfterLast()) {
+			name_q = c.getString(0);
+			phone_q = c.getInt(1);
+			c.moveToNext();
+		}
+
+		textName.setText(name_q);
+		textPhone.setText(phone_q+"");
+
 		b.setPositiveButton(R.string.btn_ok,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-												
+
 						ContentValues values = new ContentValues(2);
 
 						values.put(ContactDbHelper.NAME, textName.getText()
@@ -142,7 +152,8 @@ public class ContactActivity extends ListActivity {
 								.toString());
 
 						getContentResolver().update(
-								ContactProvider.CONTENT_URI, values, "_ID=" + selectedIndex, null);
+								ContactProvider.CONTENT_URI, values,
+								"_ID=" + selectedIndex, null);
 						mCursor.requery();
 					}
 				});
