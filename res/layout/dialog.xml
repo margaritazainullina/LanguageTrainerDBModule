@@ -7,13 +7,15 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:text="@string/field_name"
-            android:layout_width="wrap_content" 
+            android:layout_width="92dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:text="@string/field_destination" />
+
 		<EditText
-            android:id="@+id/name"
+            android:id="@+id/destET"
             android:layout_width="fill_parent" 
             android:layout_height="wrap_content" 
             android:layout_alignParentRight="true"/>
@@ -22,13 +24,33 @@
 			android:orientation="horizontal"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content">
+
 		<TextView
-            android:text="@string/field_phone"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"/>
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:text="@string/field_flight_num"
+		    android:width="92dp" />
+
 		<EditText
-            android:id="@+id/phone"
+            android:id="@+id/flightNumET"
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:layout_alignParentRight="true"/>
+	</LinearLayout>
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content">
+
+		<TextView
+		    android:layout_width="92dp"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:text="@string/field_plane_t" />
+
+		<EditText
+            android:id="@+id/planeTypeET"
             android:layout_width="fill_parent" 
             android:layout_height="wrap_content" 
             android:layout_alignParentRight="true"/>

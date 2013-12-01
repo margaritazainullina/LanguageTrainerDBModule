@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Aeroflot</string>
     <string name="btn_ok">OK</string>
     <string name="btn_cancel">Cancel</string>
-    <string name="field_name">Name:</string>
-    <string name="field_phone">Phone:</string>
-    <string name="title_add">Add new Contact</string>
-    <string name="title_edit">Edit Contact</string>
-    <string name="title_delete">Delete this Contact?</string>
+    <string name="field_destination">Destination:</string>
+    <string name="field_flight_num">Flight number:</string>
+    <string name="field_plane_t">Plane type:</string>
+    <string name="title_add">Add new flight</string>    
+    <string name="title_edit">Edit flight</string>
+    <string name="title_delete">Delete this flight?</string>
     <string name="menu_add">Add</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
-    <string name="toast_notify">Please select Contact!</string>
+    <string name="toast_notify">Please select flight!</string>
+
 </resources>

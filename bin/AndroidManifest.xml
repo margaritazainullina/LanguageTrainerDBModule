@@ -3,11 +3,11 @@
     package="com.samples.dbcontacts">
     <application android:label="@string/app_name">
         <provider 
-            android:name=".ContactProvider"
-            android:authorities="com.samples.dbcontacts.contactprovider">                       
+            android:name=".FlightProvider"
+            android:authorities="com.samples.dbcontacts.flightsprovider">                       
         </provider>          
         <activity 
-            android:name=".ContactActivity" 
+            android:name=".MainActivity" 
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

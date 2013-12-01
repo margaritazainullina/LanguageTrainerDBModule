@@ -17,8 +17,11 @@ public final class R {
         public static final int icon=0x7f020003;
     }
     public static final class id {
-        public static final int name=0x7f050000;
-        public static final int phone=0x7f050001;
+        public static final int destET=0x7f050000;
+        public static final int destination=0x7f050003;
+        public static final int flightNumET=0x7f050001;
+        public static final int flight_num=0x7f050004;
+        public static final int planeTypeET=0x7f050002;
     }
     public static final class layout {
         public static final int dialog=0x7f030000;
@@ -28,14 +31,15 @@ public final class R {
         public static final int app_name=0x7f040000;
         public static final int btn_cancel=0x7f040002;
         public static final int btn_ok=0x7f040001;
-        public static final int field_name=0x7f040003;
-        public static final int field_phone=0x7f040004;
-        public static final int menu_add=0x7f040008;
-        public static final int menu_delete=0x7f04000a;
-        public static final int menu_edit=0x7f040009;
-        public static final int title_add=0x7f040005;
-        public static final int title_delete=0x7f040007;
-        public static final int title_edit=0x7f040006;
-        public static final int toast_notify=0x7f04000b;
+        public static final int field_destination=0x7f040003;
+        public static final int field_flight_num=0x7f040004;
+        public static final int field_plane_t=0x7f040005;
+        public static final int menu_add=0x7f040009;
+        public static final int menu_delete=0x7f04000b;
+        public static final int menu_edit=0x7f04000a;
+        public static final int title_add=0x7f040006;
+        public static final int title_delete=0x7f040008;
+        public static final int title_edit=0x7f040007;
+        public static final int toast_notify=0x7f04000c;
     }
 }
