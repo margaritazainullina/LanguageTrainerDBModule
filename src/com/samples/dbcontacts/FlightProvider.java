@@ -14,7 +14,7 @@ import android.text.TextUtils;
 
 public class FlightProvider extends ContentProvider {
 
-	public static final String DB_FLIGHTS = "flights.db";
+	public static final String DB_DICTIONARY = "dictionary.db";
 
 	public static final Uri CONTENT_URI = Uri
 			.parse("content://com.samples.dbcontacts.flightsprovider/flights");
@@ -30,20 +30,30 @@ public class FlightProvider extends ContentProvider {
 	static {
 		mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 		mUriMatcher.addURI("com.samples.dbcontacts.flightsprovider",
-				FlightDbHelper.TABLE_NAME, URI_CODE);
+				DictionaryDbHelper.TABLE_NAME, URI_CODE);
 		mUriMatcher.addURI("com.samples.dbcontacts.flightsprovider",
-				FlightDbHelper.TABLE_NAME + "/#", URI_CODE_ID);
+				DictionaryDbHelper.TABLE_NAME + "/#", URI_CODE_ID);
 
 		mContactMap = new HashMap<String, String>();
-		mContactMap.put(FlightDbHelper._ID, FlightDbHelper._ID);
-		mContactMap.put(FlightDbHelper.DESTINATION,
-				FlightDbHelper.DESTINATION);
-		mContactMap.put(FlightDbHelper.FLIGHT_NUM, FlightDbHelper.FLIGHT_NUM);
-		mContactMap.put(FlightDbHelper.PLANE_TYPE, FlightDbHelper.PLANE_TYPE);
+		mContactMap.put(DictionaryDbHelper._ID, DictionaryDbHelper._ID);
+
+		ContentValues values = new ContentValues();
+		mContactMap.put(DictionaryDbHelper.KANJI, DictionaryDbHelper.KANJI);
+		mContactMap.put(DictionaryDbHelper.LEVEL, DictionaryDbHelper.LEVEL);
+		mContactMap.put(DictionaryDbHelper.TRANSCRIPTION,
+				DictionaryDbHelper.TRANSCRIPTION);
+		mContactMap.put(DictionaryDbHelper.ROMAJI, DictionaryDbHelper.ROMAJI);
+		mContactMap.put(DictionaryDbHelper.TRANSLATIONS,
+				DictionaryDbHelper.TRANSLATIONS);
+		mContactMap.put(DictionaryDbHelper.EXAMPLES, DictionaryDbHelper.EXAMPLES);
+		mContactMap.put(DictionaryDbHelper.PERCENTAGE, DictionaryDbHelper.PERCENTAGE);
+		mContactMap.put(DictionaryDbHelper.SHOWNTIMES, DictionaryDbHelper.SHOWNTIMES);
+		mContactMap.put(DictionaryDbHelper.LASTVIEW, DictionaryDbHelper.LASTVIEW);
+
 	}
 
 	public String getDbName() {
-		return (DB_FLIGHTS);
+		return (DB_DICTIONARY);
 	}
 
 	public static SQLiteDatabase getDb() {
@@ -52,7 +62,7 @@ public class FlightProvider extends ContentProvider {
 
 	@Override
 	public boolean onCreate() {
-		db = (new FlightDbHelper(getContext())).getWritableDatabase();
+		db = (new DictionaryDbHelper(getContext())).getWritableDatabase();
 		return (db == null) ? false : true;
 	}
 
@@ -62,12 +72,12 @@ public class FlightProvider extends ContentProvider {
 
 		String orderBy;
 		if (TextUtils.isEmpty(sort)) {
-			orderBy = FlightDbHelper.DESTINATION;
+			orderBy = DictionaryDbHelper.LEVEL;
 		} else {
 			orderBy = sort;
 		}
 
-		Cursor c = db.query(FlightDbHelper.TABLE_NAME, projection, selection,
+		Cursor c = db.query(DictionaryDbHelper.TABLE_NAME, projection, selection,
 				selectionArgs, null, null, orderBy);
 		c.setNotificationUri(getContext().getContentResolver(), url);
 		return c;
@@ -78,8 +88,8 @@ public class FlightProvider extends ContentProvider {
 
 		ContentValues values = new ContentValues(inValues);
 
-		long rowId = db.insert(FlightDbHelper.TABLE_NAME,
-				FlightDbHelper.DESTINATION, values);
+		long rowId = db.insert(DictionaryDbHelper.TABLE_NAME,
+				DictionaryDbHelper.KANJI, values);
 		if (rowId > 0) {
 			Uri uri = ContentUris.withAppendedId(CONTENT_URI, rowId);
 			getContext().getContentResolver().notifyChange(uri, null);
@@ -91,7 +101,7 @@ public class FlightProvider extends ContentProvider {
 
 	@Override
 	public int delete(Uri url, String where, String[] whereArgs) {
-		int retVal = db.delete(FlightDbHelper.TABLE_NAME, where, whereArgs);
+		int retVal = db.delete(DictionaryDbHelper.TABLE_NAME, where, whereArgs);
 		getContext().getContentResolver().notifyChange(url, null);
 		return retVal;
 	}
@@ -99,7 +109,7 @@ public class FlightProvider extends ContentProvider {
 	@Override
 	public int update(Uri url, ContentValues values, String where,
 			String[] whereArgs) {
-		int retVal = db.update(FlightDbHelper.TABLE_NAME, values, where,
+		int retVal = db.update(DictionaryDbHelper.TABLE_NAME, values, where,
 				whereArgs);
 		getContext().getContentResolver().notifyChange(url, null);
 		return retVal;

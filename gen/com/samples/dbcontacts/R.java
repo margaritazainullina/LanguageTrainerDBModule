@@ -18,10 +18,17 @@ public final class R {
     }
     public static final class id {
         public static final int destET=0x7f050000;
-        public static final int destination=0x7f050003;
         public static final int flightNumET=0x7f050001;
-        public static final int flight_num=0x7f050004;
         public static final int planeTypeET=0x7f050002;
+        public static final int t1=0x7f05000b;
+        public static final int t2=0x7f05000a;
+        public static final int t3=0x7f050009;
+        public static final int t4=0x7f050008;
+        public static final int t5=0x7f050007;
+        public static final int t6=0x7f050006;
+        public static final int t7=0x7f050005;
+        public static final int t8=0x7f050004;
+        public static final int t9=0x7f050003;
     }
     public static final class layout {
         public static final int dialog=0x7f030000;
