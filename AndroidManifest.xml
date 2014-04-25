@@ -3,8 +3,9 @@
     package="ua.hneu.languagetrainer.db">
     <application android:label="@string/app_name">
         <provider 
-            android:name=".DictionaryDAO"
-            android:authorities="ua.hneu.languagetrainer.db.flightsprovider">                       
+            android:name="ua.hneu.languagetrainer.db.dao.VocabularyDAO"
+            android:authorities="ua.hneu.languagetrainer.db.vocabularyprovider">     
+                              
         </provider>          
         <activity 
             android:name="ua.hneu.languagetrainer.db.MainActivity" 

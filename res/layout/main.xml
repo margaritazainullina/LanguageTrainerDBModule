@@ -84,6 +84,15 @@
 		    android:layout_toLeftOf="@+id/t2"
 		    android:text="1"
 		    android:textSize="18sp" />
+
+		<TextView
+		    android:id="@+id/t0"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:text="0"
+		    android:textSize="18sp" />
 			
 </RelativeLayout>
 

@@ -20,6 +20,7 @@ public final class R {
         public static final int destET=0x7f050000;
         public static final int flightNumET=0x7f050001;
         public static final int planeTypeET=0x7f050002;
+        public static final int t0=0x7f05000c;
         public static final int t1=0x7f05000b;
         public static final int t2=0x7f05000a;
         public static final int t3=0x7f050009;

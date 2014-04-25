@@ -1,13 +1,13 @@
 package ua.hneu.languagetrainer.db;
 
 import ua.hneu.languagetrainer.db.R;
+import ua.hneu.languagetrainer.db.dao.VocabularyDAO;
+import ua.hneu.languagetrainer.service.VocabularyService;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.SimpleCursorAdapter;
 
@@ -24,45 +23,47 @@ public class MainActivity extends ListActivity {
 	private static final int IDM_EDIT = 102;
 	private static final int IDM_DELETE = 103;
 	private static int selectedIndex;
+	VocabularyService vs = new VocabularyService();
 
 	private Cursor mCursor;
 	private ListAdapter mAdapter;
 
 	private static final String[] mContent = new String[] {
-			DictionaryDbHelper._ID, DictionaryDbHelper.KANJI,
-			DictionaryDbHelper.LEVEL, DictionaryDbHelper.TRANSCRIPTION,
-			DictionaryDbHelper.ROMAJI, DictionaryDbHelper.TRANSLATIONS,
-			DictionaryDbHelper.EXAMPLES, DictionaryDbHelper.PERCENTAGE,
-			DictionaryDbHelper.SHOWNTIMES, DictionaryDbHelper.LASTVIEW };
+			DictionaryDbHelper._ID, VocabularyDAO.KANJI, VocabularyDAO.LEVEL,
+			VocabularyDAO.TRANSCRIPTION, VocabularyDAO.ROMAJI,
+			VocabularyDAO.TRANSLATIONS, VocabularyDAO.EXAMPLES,
+			VocabularyDAO.PERCENTAGE, VocabularyDAO.LASTVIEW };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		SQLiteDatabase db = DictionaryDAO.getDb();
-		DictionaryDbHelper d = new DictionaryDbHelper(getBaseContext());
-		d.onUpgrade(db, 0, 0);
-
-		mCursor = managedQuery(DictionaryDAO.CONTENT_URI, mContent, null, null,
+		mCursor = managedQuery(VocabularyDAO.CONTENT_URI, mContent, null, null,
 				null);
 
 		mAdapter = new SimpleCursorAdapter(this, R.layout.main, mCursor,
-				new String[] { DictionaryDbHelper.KANJI,
-						DictionaryDbHelper.LEVEL,
-						DictionaryDbHelper.TRANSCRIPTION,
-						DictionaryDbHelper.ROMAJI,
-						DictionaryDbHelper.TRANSLATIONS,
-						DictionaryDbHelper.EXAMPLES,
-						DictionaryDbHelper.PERCENTAGE,
-						DictionaryDbHelper.SHOWNTIMES,
-						DictionaryDbHelper.LASTVIEW }, new int[] { R.id.t1,
-						R.id.t2, R.id.t3, R.id.t4, R.id.t5, R.id.t6, R.id.t7,
-						R.id.t8, R.id.t9 });
+				new String[] { VocabularyDAO.ID,
+				VocabularyDAO.KANJI, VocabularyDAO.LEVEL,
+						VocabularyDAO.TRANSCRIPTION, VocabularyDAO.ROMAJI,
+						VocabularyDAO.TRANSLATIONS, VocabularyDAO.EXAMPLES,
+						VocabularyDAO.PERCENTAGE, VocabularyDAO.LASTVIEW },
+				new int[] { R.id.t0,R.id.t1, R.id.t2, R.id.t3, R.id.t4, R.id.t5,
+						R.id.t6, R.id.t7, R.id.t8 });
 
 		setListAdapter(mAdapter);
 
+		/*vs.dropTable();
+		vs.createTable();
+
 		// insert values
-		d.insert("警官", 5, "けいかん", "keikan", "полицейский", "", 0.9, 1, "2013-10-07 08:23:19", getContentResolver());
+		vs.insert("警官", 5, "けいかん", "keikan", "полицейский", "", 0.9,
+				"2013-10-07 08:23:19", 1, getContentResolver());
+		// edit
+		vs.edit(1, "警官", 4, "けいかん", "keikan", "полицейский", "", 0.9,
+				"2013-10-07 08:23:19", 1, getContentResolver());*/
+		
+		vs.setPercentage(1, 1, getContentResolver());
+				
 		mCursor.requery();
 
 		getListView().setOnItemClickListener(new OnItemClickListener() {
@@ -73,28 +74,6 @@ public class MainActivity extends ListActivity {
 				selectedIndex = (int) id;
 			}
 		});
-
-		
-		
-		// edit
-		/*String[] col = { "DESTINATION", "FLIGHT_NUM", "PLANE_TYPE" };
-		Cursor c = getContentResolver().query(DictionaryDAO.CONTENT_URI, col,
-				"_ID=" + selectedIndex, null, null, null);
-		c.moveToFirst();
-
-		String dest_q = "";
-		String flight_num_q = "";
-		String plane_type_q = "";
-		while (!c.isAfterLast()) {
-			dest_q = c.getString(0);
-			flight_num_q = c.getString(1);
-			plane_type_q = c.getString(2);
-			c.moveToNext();
-		}
-
-		destET.setText(dest_q);
-		flightNumET.setText(flight_num_q);
-		planeTypeET.setText(plane_type_q);*/
 
 	}
 
@@ -135,7 +114,7 @@ public class MainActivity extends ListActivity {
 
 		builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
-				getContentResolver().delete(DictionaryDAO.CONTENT_URI,
+				getContentResolver().delete(VocabularyDAO.CONTENT_URI,
 						"_ID=" + selectedIndex, null);
 				mCursor.requery();
 			}
