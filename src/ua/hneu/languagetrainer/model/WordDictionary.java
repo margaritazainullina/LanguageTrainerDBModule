@@ -26,8 +26,8 @@ public class WordDictionary {
 	public ArrayList<String> getAllKanji() {
 		ArrayList<String> kanji = new ArrayList<String>();
 		for (DictionaryEntry e : entries) {
-			if (e.getWord() != "")
-				kanji.add(e.getWord());
+			if (e.getKanji() != "")
+				kanji.add(e.getKanji());
 		}
 		return kanji;
 	}
@@ -36,7 +36,7 @@ public class WordDictionary {
 	public ArrayList<Integer> getAllIds() {
 		ArrayList<Integer> ids = new ArrayList<Integer>();
 		for (DictionaryEntry e : entries) {
-			if (e.getWord() != "")
+			if (e.getKanji() != "")
 				ids.add(e.getId());
 		}
 		return ids;

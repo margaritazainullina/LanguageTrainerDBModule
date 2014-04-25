@@ -1,20 +1,39 @@
 package ua.hneu.languagetrainer.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class DictionaryEntry implements Comparable{
 
 	private int id;
-	private String word;
-	private WordMeaning meaning;
+	private String kanji;
+	private int level;
+	private String examples;
+	private String lastview;
+	private int showntimes;	
 	private double learnedPercentage;
+	private WordMeaning meaning;
 
-	public DictionaryEntry(int id, String word, WordMeaning meaning, double learnedPercentage) {
+	
+	
+	public DictionaryEntry(int id, String kanji, int level, String transcription,
+			String romaji, String translations, String examples, double percentage, String lastview, int  showntimes) {
+		
+		String[] parts = translations.split(";");
+		List<String> translations1 = new ArrayList<String>(Arrays.asList(parts));
+		
+		WordMeaning meaning = new WordMeaning(transcription, romaji,translations1);
+		
 		this.id = id;
-		this.word = word;
+		this.kanji = kanji;
+		this.level=level;
+		this.examples=examples;
+		this.lastview=lastview;
+		this.showntimes=showntimes;	
+		this.learnedPercentage=percentage;
 		this.meaning = meaning;
-		this.learnedPercentage = learnedPercentage;
 	}
 	
 	@Override
@@ -40,12 +59,52 @@ public class DictionaryEntry implements Comparable{
 		this.id = id;
 	}
 
-	public String getWord() {
-		return word;
+	public String getKanji() {
+		return kanji;
 	}
 
-	public void setWord(String word) {
-		this.word = word;
+	public int getLevel() {
+		return level;
+	}
+
+	public String getExamples() {
+		return examples;
+	}
+
+	public String getLastview() {
+		return lastview;
+	}
+
+	public int getShowntimes() {
+		return showntimes;
+	}
+
+	public WordMeaning getMeaning() {
+		return meaning;
+	}
+
+	public void setKanji(String kanji) {
+		this.kanji = kanji;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public void setExamples(String examples) {
+		this.examples = examples;
+	}
+
+	public void setLastview(String lastview) {
+		this.lastview = lastview;
+	}
+
+	public void setShowntimes(int showntimes) {
+		this.showntimes = showntimes;
+	}
+
+	public void setMeaning(WordMeaning meaning) {
+		this.meaning = meaning;
 	}
 
 	public WordMeaning getMeanings() {
@@ -99,7 +158,7 @@ public class DictionaryEntry implements Comparable{
 	@Override
 	public int compareTo(Object e) {
 		DictionaryEntry e1 = (DictionaryEntry) e;
-		return this.word.compareTo(e1.word);
+		return this.kanji.compareTo(e1.kanji);
 	}
 	
 }

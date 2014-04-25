@@ -2,6 +2,7 @@ package ua.hneu.languagetrainer.db;
 
 import ua.hneu.languagetrainer.db.R;
 import ua.hneu.languagetrainer.db.dao.VocabularyDAO;
+import ua.hneu.languagetrainer.model.DictionaryEntry;
 import ua.hneu.languagetrainer.service.VocabularyService;
 
 import android.app.AlertDialog;
@@ -61,6 +62,8 @@ public class MainActivity extends ListActivity {
 		// edit
 		vs.edit(1, "警官", 4, "けいかん", "keikan", "полицейский", "", 0.9,
 				"2013-10-07 08:23:19", 1, getContentResolver());*/
+		
+		DictionaryEntry e = vs.getEntryById(1, getContentResolver());
 		
 		vs.setPercentage(1, 1, getContentResolver());
 				

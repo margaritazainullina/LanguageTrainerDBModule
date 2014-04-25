@@ -1,6 +1,8 @@
 package ua.hneu.languagetrainer.service;
 
 import ua.hneu.languagetrainer.db.dao.VocabularyDAO;
+import ua.hneu.languagetrainer.model.DictionaryEntry;
+import ua.hneu.languagetrainer.model.WordMeaning;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -8,6 +10,43 @@ import android.database.Cursor;
 public class VocabularyService {
 	public static String TABLE_NAME = "vocabulary";
 
+	public DictionaryEntry getEntryById(int id, ContentResolver cr){
+		String[] col = { "KANJI", "LEVEL", "TRANSCRIPTION", "ROMAJI",
+				"TRANSLATIONS", "EXAMPLES", "PERCENTAGE", "LASTVIEW",
+				"SHOWNTIMES" };
+		Cursor c = cr.query(VocabularyDAO.CONTENT_URI, col, "_ID=" + id, null,
+				null, null);
+		c.moveToFirst();
+
+		DictionaryEntry e;
+		
+		String kanji = "";
+		int level = 0;
+		String transcription = "";
+		String romaji = "";
+		String translations = "";
+		String examples = "";
+		int percentage = 0;
+		String lastview = "";
+		int showntimes = 0;
+
+		while (!c.isAfterLast()) {
+			kanji = c.getString(0);
+			id = c.getInt(1);
+			transcription = c.getString(2);
+			romaji = c.getString(3);
+			translations = c.getString(4);
+			examples = c.getString(5);
+			percentage = c.getInt(6);
+			lastview = c.getString(7);
+			showntimes = c.getInt(8);
+			c.moveToNext();
+		}
+
+		e = new DictionaryEntry(id, kanji, level, transcription, romaji, translations, examples, percentage, lastview, showntimes);
+		return e;
+	}
+	
 	public void insert(String kanji, int level, String transcription,
 			String romaji, String translations, String examples,
 			double percentage, String lastview, int showntimes,
@@ -39,7 +78,6 @@ public class VocabularyService {
 		values.put(VocabularyDAO.PERCENTAGE, percentage);
 		values.put(VocabularyDAO.LASTVIEW, lastview);
 		values.put(VocabularyDAO.SHOWNTIMES, showntimes);
-		cr.insert(VocabularyDAO.CONTENT_URI, values);
 		cr.update(VocabularyDAO.CONTENT_URI, values, "_ID=" + id, null);
 	}
 
@@ -83,7 +121,6 @@ public class VocabularyService {
 		values.put(VocabularyDAO.PERCENTAGE, percentage);
 		values.put(VocabularyDAO.LASTVIEW, lastview);
 		values.put(VocabularyDAO.SHOWNTIMES, showntimes);
-		cr.insert(VocabularyDAO.CONTENT_URI, values);
 		cr.update(VocabularyDAO.CONTENT_URI, values, "_ID=" + id, null);
 	}
 
